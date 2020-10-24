@@ -42,15 +42,12 @@ public class ConfigFacadeApi {
         // 回放器
         config.setRepeatIdentities(Lists.newArrayList("java", "http"));
         // 白名单列表
-        config.setHttpEntrancePatterns(Lists.newArrayList("^/regress/.*$"));
+        config.setHttpEntrancePatterns(Lists.newArrayList("^/greeting.*$"));
         // java入口方法
-        behaviors.add(new Behavior("com.alibaba.repeater.console.service.impl.RegressServiceImpl", "getRegress"));
+        behaviors.add(new Behavior("hello.GreetingController", "greeting"));
         config.setJavaEntranceBehaviors(behaviors);
         List<Behavior> subBehaviors = Lists.newArrayList();
         // java调用插件
-        subBehaviors.add(new Behavior("com.alibaba.repeater.console.service.impl.RegressServiceImpl", "getRegressInner"));
-        subBehaviors.add(new Behavior("com.alibaba.repeater.console.service.impl.RegressServiceImpl", "findPartner"));
-        subBehaviors.add(new Behavior("com.alibaba.repeater.console.service.impl.RegressServiceImpl", "slogan"));
         config.setJavaSubInvokeBehaviors(subBehaviors);
         config.setUseTtl(true);
         return RepeaterResult.builder().success(true).message("operate success").data(config).build();
